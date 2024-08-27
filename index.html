@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Equation Calculator</title>
+    <style>
+        .input-field {
+            width: 60px;
+            padding: 5px;
+            text-align: center;
+            margin: 0 3px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .equation-wrapper {
+            font-size: 18px;
+            font-family: 'Verdana', sans-serif;
+            margin-bottom: 15px;
+        }
+
+        .superscript {
+            vertical-align: super;
+            font-size: smaller;
+        }
+
+        #calculate-btn {
+            padding: 7px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        #result-display {
+            font-weight: bold;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="equation-wrapper">
+        (<input type="number" id="num1" class="input-field" placeholder="Base">
+        <span class="superscript"><input type="number" id="exp1" class="input-field" placeholder="Exp"></span>)
+        + log
+        <input type="number" id="baseLog" class="input-field" placeholder="Log Base">
+        (<input type="number" id="numerator" class="input-field" placeholder="Num">
+        /
+        <input type="number" id="denominator" class="input-field" placeholder="Den">)
+    </div>
+
+    <button id="calculate-btn" onclick="performCalculation()">Calculate</button>
+
+    <p id="result-display">Result: <span id="result"></span></p>
+
+    <script>
+        function performCalculation() {
+            const num1 = parseFloat(document.getElementById('num1').value) || 1;
+            const exp1 = parseFloat(document.getElementById('exp1').value) || 1;
+            const baseLog = parseFloat(document.getElementById('baseLog').value) || 10;
+            const numerator = parseFloat(document.getElementById('numerator').value) || 1;
+            const denominator = parseFloat(document.getElementById('denominator').value) || 1;
+
+            const firstPart = Math.pow(num1, exp1);
+            const secondPart = Math.log(numerator / denominator) / Math.log(baseLog);
+
+            const finalResult = firstPart + secondPart;
+
+            document.getElementById('result').textContent = finalResult.toFixed(2);
+        }
+    </script>
+
+</body>
+
+</html>
